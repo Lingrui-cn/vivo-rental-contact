@@ -156,6 +156,18 @@ body{
 .doc-btn:hover .arrow{transform:translateX(3px)}
 .doc-btn:active{transform:translateY(0)}
 
+/* === lens group hero image === */
+.lens-group-wrap{
+  width:100%;max-width:420px;margin:48px auto 0;
+  padding:0 12px;
+  animation:fadeSlideUp .7s .55s ease-out both
+}
+.lens-group-wrap img{
+  width:100%;height:auto;display:block;
+  border-radius:16px;
+  box-shadow:0 4px 32px rgba(65,95,255,.1)
+}
+
 /* ============ X300 Ultra 镜头展示区 ============ */
 .section-lens{
   width:100%;max-width:420px;margin:48px auto 0;
@@ -171,7 +183,7 @@ body{
 }
 .section-sub{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:2px;margin-bottom:24px;white-space:nowrap}
 
-/* vivo-style lens card with image + animation */
+/* vivo-style lens card with real image + animation */
 .lens-grid{display:flex;flex-direction:column;gap:16px}
 .lens-card{
   position:relative;
@@ -202,13 +214,18 @@ body{
 
 .lens-card > *{position:relative;z-index:1}
 
-/* lens image area */
+/* lens image area - real image with sweep animation */
 .lens-img-wrap{
-  width:100%;aspect-ratio:16/10;
-  background:linear-gradient(170deg,rgba(10,14,30,.9),rgba(20,28,60,.7));
+  width:100%;aspect-ratio:4/3;
+  background:linear-gradient(170deg,rgba(8,12,28,.95),rgba(16,22,50,.8));
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden
 }
+.lens-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s ease
+}
+.lens-card:hover .lens-img-wrap img{transform:scale(1.03)}
 /* animated light sweep across image */
 .lens-img-wrap::after{
   content:'';position:absolute;inset:0;
@@ -219,29 +236,18 @@ body{
 }
 @keyframes imgSweep{0%{background-position:120% 0}50%{background-position:-20% 0}100%{background-position:-20% 0}}
 
-/* lens badge on image */
+/* lens badge on image - shown over real image */
 .lens-badge-img{
   position:absolute;top:12px;left:14px;z-index:2;
   font-size:10px;font-weight:600;letter-spacing:1.5px;
-  color:rgba(65,95,255,.9);
-  background:rgba(65,95,255,.1);
-  border:1px solid rgba(65,95,255,.2);
-  border-radius:6px;padding:3px 10px
+  color:rgba(255,255,255,.88);
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;padding:3px 10px;
+  pointer-events:none
 }
-/* animated aperture rings */
-.aperture-rings{
-  position:relative;width:80px;height:80px;
-  display:flex;align-items:center;justify-content:center
-}
-.aperture-ring{
-  position:absolute;border-radius:50%;
-  border:1.5px solid rgba(65,95,255,.25);
-  animation:ringPulse 3s ease-in-out infinite
-}
-.ring1{width:80px;height:80px;animation-delay:0s}
-.ring2{width:56px;height:56px;animation-delay:.5s}
-.ring3{width:32px;height:32px;animation-delay:1s;background:rgba(65,95,255,.08)}
-@keyframes ringPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(1.08)}}
 
 .lens-info{padding:16px 16px 14px;text-align:left}
 .lens-name{font-size:14px;font-weight:600;color:rgba(255,255,255,.88);margin-bottom:10px;line-height:1.4}
@@ -254,87 +260,6 @@ body{
   letter-spacing:.5px;
   padding-top:8px;border-top:1px solid rgba(255,255,255,.05)
 }
-
-/* ============ 颜色选择器 ============ */
-.section-color{
-  width:100%;max-width:420px;margin:48px auto 0;
-  padding:0 12px;
-  animation:fadeSlideUp .7s .75s ease-out both
-}
-.color-picker{display:flex;flex-direction:column;align-items:center;gap:20px}
-.color-options{display:flex;gap:18px;justify-content:center}
-.color-option{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  cursor:pointer;padding:10px 14px;
-  border-radius:14px;border:1px solid transparent;
-  transition:all .35s ease
-}
-.color-option.active{border-color:rgba(65,95,255,.35);background:rgba(65,95,255,.06)}
-.color-option span{font-size:12px;color:rgba(255,255,255,.45);transition:color .3s}
-.color-option.active span{color:rgba(255,255,255,.85)}
-.color-dot{
-  width:34px;height:34px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.1);
-  transition:border-color .3s ease,box-shadow .3s ease
-}
-.color-option.active .color-dot{border-color:rgba(65,95,255,.5);box-shadow:0 0 12px rgba(65,95,255,.25)}
-
-/* animated phone mockup */
-.color-preview{
-  width:100%;display:flex;justify-content:center;
-  min-height:200px;align-items:center
-}
-.phone-mockup{display:flex;flex-direction:column;align-items:center;gap:12px}
-.phone-frame{
-  width:130px;height:190px;
-  border-radius:22px;
-  border:2px solid rgba(255,255,255,.1);
-  position:relative;overflow:hidden;
-  transition:all .6s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 20px rgba(65,95,255,.06)
-}
-/* animated screen content */
-.phone-screen{
-  width:100%;height:100%;border-radius:20px;
-  position:relative;overflow:hidden;
-  transition:background .6s ease
-}
-/* animated scanning line on phone screen */
-.phone-screen::after{
-  content:'';position:absolute;left:10%;width:80%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
-  animation:scanLine 3s ease-in-out infinite;
-  pointer-events:none
-}
-@keyframes scanLine{0%{top:0;opacity:0}10%{opacity:.6}90%{opacity:.6}100%{top:100%;opacity:0}}
-
-/* camera deco on phone */
-.phone-lens-deco{
-  position:absolute;top:16px;left:50%;transform:translateX(-50%);
-  display:flex;gap:7px;align-items:center;z-index:2
-}
-.deco-ring{
-  width:16px;height:16px;border-radius:50%;
-  border:1.5px solid rgba(255,255,255,.12);
-  animation:decoPulse 3s ease-in-out infinite
-}
-.deco-ring:first-child{width:24px;height:24px;border-color:rgba(65,95,255,.25);animation-delay:.3s}
-@keyframes decoPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.9;transform:scale(1.1)}}
-
-.phone-camera-block{
-  position:absolute;top:14px;right:8px;
-  width:28px;height:28px;
-  background:rgba(255,255,255,.03);
-  border-radius:7px;border:1px solid rgba(255,255,255,.05)
-}
-.phone-label{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.5px;transition:color .4s ease}
-.color-preview.green-show .phone-frame{border-color:rgba(65,180,80,.25);box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 24px rgba(65,180,80,.12)}
-.color-preview.green-show .phone-screen{background:linear-gradient(170deg,#1a2e1a 0%,#0d1a0d 50%,#1a2e1a 100%)}
-.color-preview.green-show .phone-label{color:rgba(65,180,80,.5)}
-.color-preview.black-show .phone-frame{border-color:rgba(255,255,255,.18)}
-.color-preview.black-show .phone-screen{background:linear-gradient(170deg,#1a1a1a 0%,#0d0d0d 50%,#1a1a1a 100%)}
-.color-preview.silver-show .phone-frame{border-color:rgba(192,200,208,.25);box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 24px rgba(192,200,208,.1)}
-.color-preview.silver-show .phone-screen{background:linear-gradient(170deg,#c0c8d0 0%,#a8b0b8 50%,#c0c8d0 100%)}
 
 /* ============ 影像功能展示 ============ */
 .section-features{
@@ -377,6 +302,36 @@ body{
 .feature-name{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.82);line-height:1.4}
 .feature-desc{font-size:11px;color:rgba(255,255,255,.3);line-height:1.6}
 
+/* ============ 底图英雄区 ============ */
+.bottom-hero{
+  width:100%;max-width:420px;margin:56px auto 0;
+  padding:0 12px;
+  animation:fadeSlideUp .7s 1.1s ease-out both;
+  position:relative;border-radius:20px;overflow:hidden
+}
+.bottom-hero img{
+  width:100%;height:auto;display:block;
+  border-radius:20px
+}
+.bottom-hero-overlay{
+  position:absolute;inset:0;
+  border-radius:20px;
+  background:linear-gradient(180deg,transparent 20%,rgba(6,10,24,.82) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:32px 24px;
+  pointer-events:none
+}
+.bottom-hero-title{
+  font-size:22px;font-weight:700;letter-spacing:1px;line-height:1.4;
+  background:linear-gradient(135deg,#fff 30%,rgba(65,95,255,.85) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px
+}
+.bottom-hero-sub{
+  font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.5px;line-height:1.6
+}
+
 /* === footer === */
 .footer{margin-top:28px;text-align:center;font-size:12px;color:rgba(255,255,255,.2);letter-spacing:1px;white-space:nowrap;animation:fadeSlideUp .7s .5s ease-out both}
 
@@ -389,7 +344,7 @@ body{
 }
 @media(min-width:700px){
   .content{max-width:560px}
-  .section-lens,.section-color,.section-features{max-width:560px}
+  .section-lens,.section-features,.bottom-hero,.lens-group-wrap{max-width:560px}
   .lens-card{min-width:140px}
 }
 </style>
@@ -414,15 +369,6 @@ body{
     });
   }catch(e){}
 })();
-
-function selectColor(el,color){
-  document.querySelectorAll('.color-option').forEach(function(o){o.classList.remove('active')});
-  el.classList.add('active');
-  var preview=document.querySelector('.color-preview');
-  if(!preview)return;
-  preview.classList.remove('green-show','black-show','silver-show');
-  preview.classList.add(color+'-show');
-}
 </script>
 </head>
 <body>
@@ -460,6 +406,11 @@ function selectColor(el,color){
   <div class="footer">添加时请备注「租赁咨询」</div>
 </div>
 
+<!-- ======== 镜头群图片 ======== -->
+<div class="lens-group-wrap">
+  <img src="lens-group.avif" alt="蔡司大师镜头群">
+</div>
+
 <!-- ======== 镜头展示区 ======== -->
 <div class="section-lens" id="lens-section">
   <div class="section-title">蔡司大师镜头群</div>
@@ -469,11 +420,7 @@ function selectColor(el,color){
     <div class="lens-card">
       <div class="lens-img-wrap">
         <div class="lens-badge-img">35mm</div>
-        <div class="aperture-rings">
-          <div class="aperture-ring ring1"></div>
-          <div class="aperture-ring ring2"></div>
-          <div class="aperture-ring ring3"></div>
-        </div>
+        <img src="lens35mm.avif" alt="蔡司人文纪实镜头 II">
       </div>
       <div class="lens-info">
         <div class="lens-name">蔡司人文纪实镜头 II</div>
@@ -492,16 +439,12 @@ function selectColor(el,color){
     <div class="lens-card">
       <div class="lens-img-wrap">
         <div class="lens-badge-img">85mm</div>
-        <div class="aperture-rings">
-          <div class="aperture-ring ring1"></div>
-          <div class="aperture-ring ring2"></div>
-          <div class="aperture-ring ring3"></div>
-        </div>
+        <img src="lens85mm.avif" alt="蔡司云台级长焦镜头">
       </div>
       <div class="lens-info">
         <div class="lens-name">蔡司云台级长焦镜头</div>
         <div class="lens-params">
-          <div class="param-row"><span class="param-label">传感器</span><span class="param-value">蓝图×三星 HP0</span></div>
+          <div class="param-row"><span class="param-label">传感器</span><span class="param-value">蓝图×三星 HP9</span></div>
           <div class="param-row"><span class="param-label">像素</span><span class="param-value">2 亿</span></div>
           <div class="param-row"><span class="param-label">尺寸</span><span class="param-value">1/1.4"</span></div>
           <div class="param-row"><span class="param-label">光圈</span><span class="param-value">f/2.67</span></div>
@@ -515,11 +458,7 @@ function selectColor(el,color){
     <div class="lens-card">
       <div class="lens-img-wrap">
         <div class="lens-badge-img">14mm</div>
-        <div class="aperture-rings">
-          <div class="aperture-ring ring1"></div>
-          <div class="aperture-ring ring2"></div>
-          <div class="aperture-ring ring3"></div>
-        </div>
+        <img src="lens14mm.avif" alt="蔡司超广角镜头">
       </div>
       <div class="lens-info">
         <div class="lens-name">蔡司超广角镜头</div>
@@ -535,43 +474,6 @@ function selectColor(el,color){
       </div>
     </div>
 
-  </div>
-</div>
-
-<!-- ======== 颜色选择器 ======== -->
-<div class="section-color" id="color-section">
-  <div class="section-title">经典相机拼接设计</div>
-  <div class="section-sub">即刻挑选你的 V 单</div>
-  <div class="color-picker">
-    <div class="color-options">
-      <div class="color-option active" data-color="green" onclick="selectColor(this,'green')">
-        <div class="color-dot" style="background:linear-gradient(135deg,#2d4a2d,#5a8a5a)"></div>
-        <span>胶片绿</span>
-      </div>
-      <div class="color-option" data-color="black" onclick="selectColor(this,'black')">
-        <div class="color-dot" style="background:linear-gradient(135deg,#1a1a1a,#3a3a3a)"></div>
-        <span>黑 Ka</span>
-      </div>
-      <div class="color-option" data-color="silver" onclick="selectColor(this,'silver')">
-        <div class="color-dot" style="background:linear-gradient(135deg,#c0c8d0,#e8ecef)"></div>
-        <span>银调</span>
-      </div>
-    </div>
-    <div class="color-preview green-show" id="colorPreview">
-      <div class="phone-mockup">
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="phone-lens-deco">
-              <div class="deco-ring"></div>
-              <div class="deco-ring"></div>
-              <div class="deco-ring"></div>
-            </div>
-            <div class="phone-camera-block"></div>
-          </div>
-        </div>
-        <div class="phone-label">生命感胶片气息</div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -610,6 +512,15 @@ function selectColor(el,color){
       <div class="feature-name">电影风格直出</div>
       <div class="feature-desc">多款胶片风格，怎么拍都有电影感，调光调色调出独家创作</div>
     </div>
+  </div>
+</div>
+
+<!-- ======== 底图英雄区 ======== -->
+<div class="bottom-hero">
+  <img src="bg-bottom.avif" alt="V 单 专业影像体验">
+  <div class="bottom-hero-overlay">
+    <div class="bottom-hero-title">V 单 · 专业影像体验</div>
+    <div class="bottom-hero-sub">由近至远，全焦段影像级出片。</div>
   </div>
 </div>
 
