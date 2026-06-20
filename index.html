@@ -112,6 +112,60 @@ body{
 .card img{width:100%;height:auto;display:block;position:relative;z-index:1}
 .card-inner-border{position:absolute;inset:4px;border-radius:17px;border:1px solid rgba(255,255,255,.06);pointer-events:none;z-index:2}
 
+/* === contact btn (above doc btn) === */
+.contact-btn-wrap{animation:fadeSlideUp .7s .35s ease-out both}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:20px;padding:12px 28px;
+  border-radius:14px;
+  color:#fff;text-decoration:none;
+  font-size:14px;font-weight:600;letter-spacing:.5px;
+  white-space:nowrap;position:relative;overflow:hidden;cursor:pointer;
+  background:linear-gradient(135deg,rgba(65,95,255,.2),rgba(0,180,255,.15));
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border:1px solid rgba(65,95,255,.25);
+  box-shadow:inset 1px -1px 1px -1px rgba(255,255,255,.3),inset -1px 1px 1px -1px rgba(255,255,255,.22),inset 4px -4px 1px -4px rgba(255,255,255,.12),inset -4px 4px 1px -4px rgba(255,255,255,.1),inset 0 0 2px rgba(0,0,0,.3),0 3px 18px rgba(65,95,255,.15);
+  transition:all .35s ease;z-index:1
+}
+.contact-btn::before{
+  content:'';position:absolute;
+  top:32%;left:50%;transform:translateX(-50%);
+  width:calc(100% - 12px);height:calc(100% - 12px);
+  border-radius:12px;border:1px solid rgba(0,0,0,.45);
+  filter:blur(6px);z-index:0;pointer-events:none
+}
+.contact-btn::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(65,95,255,.35) 40%,rgba(0,212,255,.3) 50%,rgba(65,95,255,.35) 60%,transparent 100%);
+  border-radius:14px 14px 0 0;z-index:3;pointer-events:none
+}
+.contact-btn .shimmer{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 0%,rgba(65,95,255,.08) 35%,rgba(0,212,255,.16) 48%,rgba(65,95,255,.08) 62%,transparent 100%);
+  background-size:400% 100%;
+  animation:shimmer 3.5s ease-in-out infinite;
+  border-radius:inherit;pointer-events:none;z-index:1
+}
+.contact-btn .btn-text{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px}
+.contact-btn .icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.contact-btn .arrow{font-size:12px;color:rgba(65,95,255,.6);transition:transform .2s;flex-shrink:0}
+.contact-btn:hover{background:linear-gradient(135deg,rgba(65,95,255,.3),rgba(0,180,255,.22));border-color:rgba(65,95,255,.4);box-shadow:inset 1px -1px 1px -1px rgba(255,255,255,.35),0 4px 28px rgba(65,95,255,.25);transform:translateY(-1px)}
+.contact-btn:hover .arrow{transform:translateX(3px)}
+.contact-btn:active{transform:translateY(0)}
+
+/* === tutorial guide image between buttons === */
+.tutorial-img-wrap{
+  width:100%;max-width:340px;margin:16px auto 0;
+  animation:fadeSlideUp .7s .38s ease-out both;
+  position:relative;border-radius:16px;overflow:hidden;
+  box-shadow:0 2px 20px rgba(0,0,0,.25)
+}
+.tutorial-img-wrap img{
+  width:100%;height:auto;display:block;border-radius:16px
+}
+
 /* === doc button === */
 .doc-btn-wrap{animation:fadeSlideUp .7s .4s ease-out both}
 .doc-btn{
@@ -362,6 +416,21 @@ body{
       <div class="card-inner-border"></div>
       <img src="qr-full.jpg" alt="vivo官方租赁 - 企业微信客服">
     </div>
+  </div>
+
+  <div class="contact-btn-wrap">
+    <a class="contact-btn" href="https://mall.vivo.com.cn/user/urlScheme?miniAppPath=modules/vivogo/pages/shop/Index&query=scene%3D5ca636306c574aff977c3fc2d7aebb1e" target="_blank" rel="noopener">
+      <span class="shimmer"></span>
+      <span class="btn-text">
+        <span class="icon">&#x1F4AC;</span>
+        <span>跳转微信添加客服</span>
+        <span class="arrow">&#x2197;</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="tutorial-img-wrap">
+    <img src="tutorial-guide.png" alt="添加客服教程">
   </div>
 
   <div class="doc-btn-wrap">
