@@ -52,7 +52,7 @@ body{
 /* === header === */
 .header{margin-bottom:24px}
 .header h1{font-size:11px;font-weight:500;letter-spacing:4px;color:rgba(255,255,255,.2);margin-bottom:8px;white-space:nowrap}
-.header .brand{font-size:22px;font-weight:700;letter-spacing:1px;line-height:1.4;white-space:nowrap}
+.header .brand{font-size:22px;font-weight:700;letter-spacing:1px;line-height:1.4;white-space:nowrap;background:linear-gradient(135deg,#fff 30%,rgba(65,95,255,.85) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .header .brand span{color:rgba(255,255,255,.45);font-weight:400}
 .header .desc{margin-top:10px;font-size:12px;color:rgba(255,255,255,.3);letter-spacing:.5px;white-space:nowrap}
 
@@ -206,7 +206,7 @@ body{
 }
 .section-sub{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:2px;margin-bottom:24px;white-space:nowrap}
 
-/* vivo-style lens card: image bg + left text overlay */
+/* vivo-style lens card: full image (text built-in) */
 .lens-grid{display:flex;flex-direction:column;gap:16px}
 .lens-card{
   position:relative;
@@ -231,66 +231,25 @@ body{
 @keyframes rotateGlow{0%{--angle:0deg}100%{--angle:360deg}}
 @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 
-/* image as full background of card */
+/* full image display */
 .lens-img-wrap{
-  width:100%;aspect-ratio:16/9;
-  position:relative;overflow:hidden
+  width:100%;position:relative;overflow:hidden
 }
 .lens-img-wrap img{
-  width:100%;height:100%;object-fit:cover;display:block;
+  width:100%;height:auto;display:block;
   transition:transform .6s ease
 }
-.lens-card:hover .lens-img-wrap img{transform:scale(1.03)}
+.lens-card:hover .lens-img-wrap img{transform:scale(1.02)}
 
 /* light sweep */
 .lens-img-wrap::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.04) 45%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 55%,transparent 100%);
+  background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.03) 45%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.03) 55%,transparent 100%);
   background-size:300% 100%;
   animation:imgSweep 4s ease-in-out infinite;
   pointer-events:none
 }
 @keyframes imgSweep{0%{background-position:120% 0}50%{background-position:-20% 0}100%{background-position:-20% 0}}
-
-/* ===== text overlay on left side of image ===== */
-.lens-text-overlay{
-  position:absolute;top:0;left:0;
-  width:58%;height:100%;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:18px 14px 14px 16px;
-  z-index:3;
-  background:linear-gradient(90deg,
-    rgba(4,8,20,.85) 0%,
-    rgba(4,8,20,.62) 75%,
-    transparent 100%
-  );
-  pointer-events:none;
-  overflow:hidden
-}
-.lens-mm{
-  font-size:26px;font-weight:700;line-height:1.2;
-  color:#fff;margin-bottom:2px;letter-spacing:-.5px
-}
-.lens-full-name{
-  font-size:13px;font-weight:600;line-height:1.3;
-  color:#fff;margin-bottom:6px;white-space:normal
-}
-.lens-desc{
-  font-size:10px;color:rgba(255,255,255,.68);line-height:1.6;
-  margin-bottom:10px;white-space:normal
-}
-.lens-specs{
-  display:flex;flex-wrap:wrap;gap:5px 10px
-}
-.lens-spec-item{
-  display:flex;flex-direction:column;gap:0
-}
-.lens-spec-val{
-  font-size:12px;font-weight:700;color:#fff;line-height:1.25
-}
-.lens-spec-label{
-  font-size:8.5px;color:rgba(255,255,255,.42);white-space:nowrap;line-height:1.2
-}
 
 /* ============ 影像功能展示 ============ */
 .section-features{
@@ -443,54 +402,19 @@ body{
 
     <div class="lens-card">
       <div class="lens-img-wrap">
-        <img src="lens35mm.avif" alt="蔡司人文纪实镜头 II">
-        <div class="lens-text-overlay">
-          <div class="lens-mm">35mm</div>
-          <div class="lens-full-name">蔡司人文纪实镜头 II</div>
-          <div class="lens-desc">35mm人文黄金焦段，单像素的等效感光面积提升30.9%²，进光量更大，白天高解析、黑夜更纯净，出片更细腻自然。</div>
-          <div class="lens-specs">
-            <div class="lens-spec-item"><span class="lens-spec-val">2亿</span><span class="lens-spec-label">超高清像素</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">CIPA 6.5</span><span class="lens-spec-label">专业级防抖¹</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">1G+6P</span><span class="lens-spec-label">镜片结构</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">30.9%</span><span class="lens-spec-label">等效感光面积提升²</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val" style="font-size:14px">蓝图高刷追焦引擎</span><span class="lens-spec-label">超清60fps运动抓拍</span></div>
-          </div>
-        </div>
+        <img src="lens35mm-full.jpg" alt="35mm 蔡司人文纪实镜头 II">
       </div>
     </div>
 
     <div class="lens-card">
       <div class="lens-img-wrap">
-        <img src="lens85mm.avif" alt="蔡司云台级长焦镜头">
-        <div class="lens-text-overlay">
-          <div class="lens-mm">85mm</div>
-          <div class="lens-full-name">蔡司云台级<br>长焦镜头</div>
-          <div class="lens-desc">超稳超长焦运动抓拍，动静皆宜稳稳出片。</div>
-          <div class="lens-specs">
-            <div class="lens-spec-item"><span class="lens-spec-val">蔡司 APO</span><span class="lens-spec-label">色差控制标准</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">2亿</span><span class="lens-spec-label">像素</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">CIPA 7.0</span><span class="lens-spec-label">专业级防抖³</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">3° OIS</span><span class="lens-spec-label">光学防抖</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val" style="font-size:14px">蓝图高刷追焦引擎</span><span class="lens-spec-label">超清60fps运动抓拍</span></div>
-          </div>
-        </div>
+        <img src="lens85mm-full.jpg" alt="85mm 蔡司云台级长焦镜头">
       </div>
     </div>
 
     <div class="lens-card">
       <div class="lens-img-wrap">
-        <img src="lens14mm.avif" alt="蔡司超广角镜头">
-        <div class="lens-text-overlay">
-          <div class="lens-mm">14mm</div>
-          <div class="lens-full-name">蔡司超广角镜头</div>
-          <div class="lens-desc">搭载超大底 Sensor、超大光圈、超强防抖，更适合视频创作的焦段；大底拍大片，轻松驾驭动态场景。</div>
-          <div class="lens-specs">
-            <div class="lens-spec-item"><span class="lens-spec-val">f/2.0</span><span class="lens-spec-label">超大光圈</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">1/1.28"</span><span class="lens-spec-label">超大底 Sensor</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">5000万</span><span class="lens-spec-label">超高像素</span></div>
-            <div class="lens-spec-item"><span class="lens-spec-val">CIPA 6.0</span><span class="lens-spec-label">专业级防抖⁴</span></div>
-          </div>
-        </div>
+        <img src="lens14mm-full.jpg" alt="14mm 蔡司超广角镜头">
       </div>
     </div>
 
