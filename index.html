@@ -156,6 +156,29 @@ body{
 .doc-btn:hover .arrow{transform:translateX(3px)}
 .doc-btn:active{transform:translateY(0)}
 
+/* === lens group intro section === */
+.lens-group-intro{
+  width:100%;max-width:420px;margin:48px auto 0;
+  padding:0 16px;
+  animation:fadeSlideUp .7s .5s ease-out both;
+  text-align:center
+}
+.lens-group-intro .intro-title{
+  font-size:22px;font-weight:700;letter-spacing:1px;line-height:1.4;
+  background:linear-gradient(135deg,#fff 30%,rgba(65,95,255,.85) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px
+}
+.lens-group-intro .intro-quote{
+  font-size:14px;color:rgba(255,255,255,.45);letter-spacing:1px;
+  margin-bottom:14px;font-style:italic
+}
+.lens-group-intro .intro-desc{
+  font-size:12px;color:rgba(255,255,255,.3);line-height:1.8;
+  letter-spacing:.3px
+}
+
 /* === lens group hero image === */
 .lens-group-wrap{
   width:100%;max-width:420px;margin:48px auto 0;
@@ -316,9 +339,9 @@ body{
 .bottom-hero-overlay{
   position:absolute;inset:0;
   border-radius:20px;
-  background:linear-gradient(180deg,transparent 20%,rgba(6,10,24,.82) 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:32px 24px;
+  background:linear-gradient(180deg,rgba(6,10,24,.72) 0%,rgba(6,10,24,.35) 50%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:40px 24px 0;
   pointer-events:none
 }
 .bottom-hero-title{
@@ -329,7 +352,7 @@ body{
   margin-bottom:8px
 }
 .bottom-hero-sub{
-  font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.5px;line-height:1.6
+  font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.5px;line-height:1.6;text-align:center
 }
 
 /* === footer === */
@@ -404,6 +427,17 @@ body{
   </div>
 
   <div class="footer">添加时请备注「租赁咨询」</div>
+</div>
+
+<!-- ======== 镜头群介绍 ======== -->
+<div class="lens-group-intro">
+  <div class="intro-title">蔡司大师镜头群</div>
+  <div class="intro-quote">大作「镜」收其中。</div>
+  <div class="intro-desc">
+    蔡司三大定焦大师镜头全面升级，全大底，全蔡司，全黄金焦段，全专业级防抖，全高画质；<br>
+    同时，搭配等效 400mm vivo 蔡司增距镜 G2 Ultra 和等效 200mm vivo 蔡司增距镜 G2，<br>
+    组成蔡司大师镜头群，带来一机多场景的极致创作体验。
+  </div>
 </div>
 
 <!-- ======== 镜头群图片 ======== -->
