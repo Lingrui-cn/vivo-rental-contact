@@ -217,6 +217,41 @@ body{
 .doc-btn:hover .sheen{opacity:1}
 .doc-btn:active{transform:translateY(0)}
 
+/* === group chat entry === */
+.group-btn-wrap{margin-top:12px;animation:fadeSlideUp .7s .45s ease-out both}
+.group-btn{
+  font:inherit;color:#fff;cursor:pointer;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;border-radius:14px;
+  font-size:13px;font-weight:600;letter-spacing:.5px;white-space:nowrap;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(65,95,255,.32),rgba(0,180,255,.2));
+  border:1px solid rgba(65,95,255,.4);
+  box-shadow:inset 1px -1px 1px -1px rgba(255,255,255,.35),inset -1px 1px 1px -1px rgba(255,255,255,.25),0 4px 22px rgba(65,95,255,.22);
+  transition:all .35s ease;z-index:1
+}
+.group-btn::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(65,95,255,.35) 30%,transparent 50%,transparent 68%,rgba(0,212,255,.3) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:3}
+.group-btn .shimmer{position:absolute;inset:0;background:linear-gradient(105deg,transparent 0%,rgba(65,95,255,.1) 35%,rgba(0,212,255,.18) 48%,rgba(65,95,255,.1) 62%,transparent 100%);background-size:400% 100%;animation:shimmer 3.5s ease-in-out infinite;border-radius:inherit;pointer-events:none;z-index:1}
+.group-btn .sheen{position:absolute;width:150px;height:150px;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,255,255,.3),rgba(0,212,255,.12) 42%,transparent 70%);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:1;mix-blend-mode:screen}
+.group-btn .btn-text{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px}
+.group-btn .icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.group-btn .arrow{font-size:12px;color:rgba(65,95,255,.6);transition:transform .2s;flex-shrink:0}
+.group-btn:hover{transform:translateY(-1px);box-shadow:inset 1px -1px 1px -1px rgba(255,255,255,.4),0 6px 28px rgba(65,95,255,.32)}
+.group-btn:hover .arrow{transform:translateX(3px)}
+.group-btn:hover .sheen{opacity:1}
+.group-btn:active{transform:translateY(0)}
+
+/* === group qr modal === */
+[hidden]{display:none!important}
+.qr-modal{position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;padding:20px}
+.qr-mask{position:absolute;inset:0;background:rgba(3,6,18,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.qr-panel{position:relative;width:100%;max-width:340px;padding:20px;border-radius:20px;text-align:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);box-shadow:inset 1px -1px 1px -1px rgba(255,255,255,.3),0 12px 48px rgba(0,0,0,.5);animation:fadeScale .35s ease-out both}
+.qr-panel-title{font-size:15px;font-weight:700;margin-bottom:14px;background:linear-gradient(135deg,#fff 30%,rgba(65,95,255,.85) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.qr-panel picture,.qr-panel img{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain;border-radius:12px}
+.qr-panel-tip{font-size:12px;color:rgba(255,255,255,.45);margin-top:14px;line-height:1.6}
+.qr-close{margin-top:18px;padding:9px 26px;border-radius:12px;font:inherit;font-size:13px;color:#fff;cursor:pointer;background:rgba(65,95,255,.16);border:1px solid rgba(65,95,255,.3)}
+.qr-close:hover{background:rgba(65,95,255,.28)}
+
 /* === lens group intro section === */
 .lens-group-intro{
   width:100%;max-width:420px;margin:48px auto 0;
@@ -474,7 +509,32 @@ body{
     </a>
   </div>
 
+  <div class="group-btn-wrap">
+    <button class="group-btn" id="groupBtn" type="button" aria-label="查看群聊二维码">
+      <span class="shimmer"></span>
+      <span class="sheen"></span>
+      <span class="btn-text">
+        <span class="icon">&#x1F465;</span>
+        <span>加入vivo官方租赁福利群</span>
+        <span class="arrow">&#x2197;</span>
+      </span>
+    </button>
+  </div>
+
   <div class="footer">添加时请备注「租赁咨询」</div>
+</div>
+
+<div class="qr-modal" id="qrModal" hidden>
+  <div class="qr-mask" data-close></div>
+  <div class="qr-panel" role="dialog" aria-modal="true" aria-label="vivo官方租赁福利群二维码">
+    <div class="qr-panel-title">vivo官方租赁福利群</div>
+    <picture>
+      <source srcset="group-qr.avif" type="image/avif">
+      <img src="group-qr.webp" alt="vivo官方租赁福利群二维码" loading="lazy">
+    </picture>
+    <div class="qr-panel-tip">长按二维码识别 · 或截图后用微信扫一扫</div>
+    <button class="qr-close" type="button" data-close>关闭</button>
+  </div>
 </div>
 
 <!-- ======== 镜头群介绍 ======== -->
@@ -580,7 +640,7 @@ body{
 
 <script>
 (function(){
-  var sel='.contact-btn,.doc-btn,.feature-card,.lens-card';
+  var sel='.contact-btn,.doc-btn,.group-btn,.feature-card,.lens-card';
   var btns=document.querySelectorAll(sel);
   for(var i=0;i<btns.length;i++){
     (function(btn){
@@ -597,6 +657,19 @@ body{
       });
     })(btns[i]);
   }
+  })();
+</script>
+
+<script>
+(function(){
+  var modal=document.getElementById('qrModal');
+  var btn=document.getElementById('groupBtn');
+  function close(){modal.hidden=true}
+  if(btn)btn.addEventListener('click',function(){modal.hidden=false});
+  if(modal)modal.addEventListener('click',function(e){
+    if(e.target.hasAttribute('data-close'))close()
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)close()});
 })();
 </script>
 </body>
